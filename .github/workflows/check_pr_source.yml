@@ -1,0 +1,16 @@
+name: Enforce PR source branch is beta
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-source-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR source branch
+        if: ${{ github.event.pull_request.head.ref != 'beta' }}
+        run: |
+          echo "Error: Pull requests into 'main' branch must come from the 'beta' branch."
+          exit 1
