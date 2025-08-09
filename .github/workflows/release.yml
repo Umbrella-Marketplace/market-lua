@@ -13,13 +13,12 @@ jobs:
   build:
     runs-on: windows-latest
 
+    env:
+      MARKET_OUTPUT_PATH: ${{ github.workspace }}\output
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Set OUTPUT_DIR environment variable
-        run: echo "OUTPUT_DIR=%CD%\output" >> $GITHUB_ENV
-        shell: cmd
 
       - name: Create output directory
         run: mkdir output
@@ -27,13 +26,13 @@ jobs:
 
       - name: Run build.bat
         working-directory: ./builder
-        run: build.bat "%CD%"
+        run: build.bat
         shell: cmd
 
       - name: Create or Update Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: builder/market.lua
+          artifacts: ${{ env.MARKET_OUTPUT_PATH }}/market.lua
           token: ${{ secrets.GITHUB_TOKEN }}
           allowUpdates: true
           replacesArtifacts: true

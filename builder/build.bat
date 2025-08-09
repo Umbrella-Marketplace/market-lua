@@ -3,10 +3,11 @@ setlocal enabledelayedexpansion
 
 FOR %%A IN ("%~dp0..") DO set "root_path=%%~fA"
 
-if "%1" neq "" (
-  set "output=%1\market.lua"
+if not "%MARKET_OUTPUT_PATH%"=="" (
+    set "output=%MARKET_OUTPUT_PATH%\market.lua"
 ) else (
-  set "output=C:\Uc\scripts\market.lua"
+    set "desktop_path=%USERPROFILE%\Desktop"
+    set "output=%desktop_path%\market.lua"
 )
 
 set "main_folder=%root_path%"
@@ -15,6 +16,7 @@ set "tmp_modules=%~dp0__modules.txt"
 del "%tmp_modules%" >nul 2>&1
 
 echo [INFO] Building from: %main_folder%
+echo [INFO] Output file: %output%
 echo [INFO] Generating module list...
 
 echo %main_module%>>"%tmp_modules%"
