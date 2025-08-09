@@ -3,11 +3,12 @@ setlocal enabledelayedexpansion
 
 FOR %%A IN ("%~dp0..") DO set "root_path=%%~fA"
 
-if defined OUTPUT_DIR (
-    set "output=%OUTPUT_DIR%\market.lua"
+if "%1" neq "" (
+  set "output=%1\market.lua"
 ) else (
-    set "output=C:\Uc\scripts\market.lua"
+  set "output=C:\Uc\scripts\market.lua"
 )
+
 
 set "main_folder=%root_path%"
 set "main_module=main"

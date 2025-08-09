@@ -27,7 +27,7 @@ jobs:
 
       - name: Run build.bat
         working-directory: ./builder
-        run: build.bat
+        run: build.bat "%CD%\output"
         shell: cmd
 
       - name: Create or Update Release
