@@ -1,0 +1,32 @@
+name: Build and Release Lua Script
+
+on:
+  push:
+    branches:
+      - main
+      - beta
+
+permissions:
+  contents: write  
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run build.bat
+        working-directory: ./builder
+        run: build.bat
+        shell: cmd
+
+      - name: Create or Update Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: ./compiled.lua
+          token: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: true
+          replacesArtifacts: true
+          tag: ${{ github.ref_name == 'main' && 'public' || 'beta' }}
+          name: ${{ github.ref_name == 'main' && 'Public Release' || 'Beta Release' }}
