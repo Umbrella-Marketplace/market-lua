@@ -9,7 +9,6 @@ if "%1" neq "" (
   set "output=C:\Uc\scripts\market.lua"
 )
 
-
 set "main_folder=%root_path%"
 set "main_module=main"
 set "tmp_modules=%~dp0__modules.txt"

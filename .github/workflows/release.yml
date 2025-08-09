@@ -33,7 +33,7 @@ jobs:
       - name: Create or Update Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: market.lua
+          artifacts: builder/market.lua
           token: ${{ secrets.GITHUB_TOKEN }}
           allowUpdates: true
           replacesArtifacts: true
