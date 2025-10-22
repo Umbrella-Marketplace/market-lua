@@ -14,7 +14,7 @@ set "main_folder=%root_path%"
 set "main_module=main"
 set "tmp_modules=%~dp0__modules.txt"
 del "%tmp_modules%" >nul 2>&1
-
+echo [INFO] From: %MARKET_OUTPUT_PATH%
 echo [INFO] Building from: %main_folder%
 echo [INFO] Output file: %output%
 echo [INFO] Generating module list...
